@@ -140,10 +140,10 @@ numbers.match(shortHand); // Returns ["%"]
 sentence.match(shortHand); // Returns ["!"]
 
 // Match All Numbers
-instead of [0 - 9] use\ d
+instead of [0 - 9] use \d
 
 // Match All Non-Numbers
-instead of [ ^ 0 - 9] use\ D
+instead of [ ^ 0 - 9] use \D
 
 
 //  Restrict Possible Usernames
@@ -204,3 +204,51 @@ let result = favRegex.test(favWord);
 //returns true
 
 // Positive and Negative Lookahead
+
+// Positive lookahead 
+(?=...) // looks to make sure the element in the search pattern is there but wont actuallu match it
+// Negative look ahead
+(?!...) // make sure the element in the search pattern is not there
+... // is the pattern you will insert in the look aheads
+
+let password = "abc123";
+let checkPass = /(?=\w{3,6})(?=\D*\d)/; // check where the password is between 3 and 6 characters and at least one number
+checkPass.test(password); // Returns true
+
+// checks whether or not password has at least 5 charaters and have two consective digits
+let sampleWord = "astronaut";
+let pwRegex = /(?=\w{5,})(?=\D*\d{2,})/; 
+// the first lookhead checks for 5 or more character
+//the second lookahead check for two or more consectuive digits
+let result = pwRegex.test(sampleWord); // returns false
+
+// Reuse Patterns Using Capture Groups "()"
+// to specify where that string will repeat use a \ follwed by a number 
+
+/* Problem */
+// Use capture groups in reRegex to match numbers that are repeated only three times in a string, each separated by a space.
+let repeatNum = "42 42 42";
+let reRegex = /^(\d+)\s\1\s\1$/; // Change this line
+let result = reRegex.test(repeatNum);
+
+// Use Capture Groups to Search and Replace
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+wrongText.replace(silverRegex, "blue"); // Returns "The sky is blue."
+
+// Remove Whitespace from Start and End
+// Problem
+// Write a regex and use the appropriate string methods to remove whitespace at the beginning and end of strings.
+let hello = "    Hello,World     ";
+let wsRegex = /^\s+|\s+$/g ;
+let result - hello.replace(wsRegex,'');
+//returns Hello,World
+
+Solution
+// Want to remove the white space from the beginning and end of the string
+// ^ is used for the beginning and $ is for the end
+// now you need to add the pattern for space which is \s
+//it seems to be multiple spaces so use \s+
+// to search for mutiple patterns use |
+// to combine it use the follow ^\s+|\s$
+// Now that you have the pattern you want to use that replace the spaces with empty string
