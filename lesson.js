@@ -91,7 +91,7 @@ let result = difficultSpelling.match(myRegex);
 
 // Match Characters that Occur Zero or More Times
 let chewieQuote = "Aaaaaaaaaaaaaaaarrrgh!";
-let chewieRegex = /Aa*/; // match all upper and lower "a characters"
+let chewieRegex = /Aa*/; // use * to look for zero or more characters
 let result = chewieQuote.match(chewieRegex);
 // returns ["Aaaaaaaaaaaaa"]
 
@@ -126,10 +126,11 @@ let result = lastRegex.test(caboose);
 
 // Match All Letters and Numbers
 Shorthand character classes
-let longhand = /[A-Za-z0-9_]+/ ; // every number and letter
-let shorthand = /\w+/ ; // every number and letter
+let longhand = /[A-Za-z0-9_]+/; // every number and letter
+let shorthand = /\w+/; // every number and letter
 /\w/g // matches every letter 
-/\w+/ // matches between every space
+/
+\w + / / / matches between every space
 
 // Match Everything But Letters and Numbers
 let shortHand = /\W/;
@@ -139,15 +140,67 @@ numbers.match(shortHand); // Returns ["%"]
 sentence.match(shortHand); // Returns ["!"]
 
 // Match All Numbers
-instead of [0-9] use \d 
+instead of [0 - 9] use\ d
 
 // Match All Non-Numbers
- instead of [^0-9] use \D 
+instead of [ ^ 0 - 9] use\ D
 
 
 //  Restrict Possible Usernames
- let username = "JackOfAllTrades";
- let userCheck = /^[a-z]{2,}\d*$/i;
- let result = userCheck.test(username);
+let username = "JackOfAllTrades";
+let userCheck = /^[a-z]{2,}\d*$/i;
+let result = userCheck.test(username);
 
- 
+//Soultion 
+// first part
+^
+[a - z] {
+    2,
+} // Shows the first two character must be letters
+// second part
+\
+d * $ // shows that only numbers have to be the last characters in the username
+//third part
+i // ignores casing of letters
+
+
+//Match WhiteSpace
+
+let sample = "Whitespace is important in separating words";
+let countWhiteSpace = /\s/g; // use \s to match/test whitespace
+let result = sample.match(countWhiteSpace);
+//returns an array of whitespaces
+
+// Match Non-Whitespace Characters
+let sample = "Whitespace is important in separating words";
+let countNonWhiteSpace = /\S/g; // use \S to search for nonwhite space
+let result = sample.match(countNonWhiteSpace);
+//returns an array of every charcter except the white spaces
+
+// Quantity Specificers { and }
+// Put two numbers between the curly braces
+let A4 = "aaaah";
+let A2 = "aah";
+let multipleA = /a{3,5}h/; //use {} to create a range
+multipleA.test(A4); // Returns true
+multipleA.test(A2); // Returns false
+
+// Specify Only the Lower Number of Matches {number,}
+let timStr = "Timmmmber";
+let timRegex = /m{2,}/; // use {number,} to set only a lower bound 
+let result = timRegex.test(timStr);
+//returns true
+
+// Specify Exact Number of Matches {number}
+let timStr = "Timmmmber";
+let timRegex = /Tim{3}ber/; // Change this line
+let result = timRegex.test(timStr);
+//returns true
+
+// Check for All or None
+let favWord = "favorite";
+let favRegex = /favou?rite/; // use ? to check for zero or one of the prceding elements i.e characters after the question mark
+let result = favRegex.test(favWord);
+//returns true
+
+// Positive and Negative Lookahead
